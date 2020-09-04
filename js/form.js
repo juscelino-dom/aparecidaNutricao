@@ -5,8 +5,13 @@ btnAdicionaPaciente.addEventListener("click", function(event) {
     var form = document.querySelector("#formAdiciona");
     var paciente = getPacienteFormulario(form);
     var pacienteTr = mountTr(paciente);
+    if (!validaPaciente(paciente)) {
+        console.log("Paciente Invalido")
+        return
+    }
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
+    
 });
 
 function getPacienteFormulario (form) {
@@ -38,6 +43,12 @@ function mountTd(dado, classe) {
     td.textContent = dado;
     td.classList.add(classe);
     return td;
-    
-    
+}
+
+function validaPaciente (paciente) {
+    if (validaPeso(paciente.peso)) {
+        return true;
+    } else {
+        return false;
+    }
 }
