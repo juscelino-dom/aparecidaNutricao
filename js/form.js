@@ -15,11 +15,15 @@ btnAdicionaPaciente.addEventListener("click", function(event) {
     }
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
+    form.reset();
+    var mensagensErro = document.querySelector("#mensagensErro");
+    mensagensErro.innerHTML = "";
     
 });
 
 function exibeMensagensDeErro(erros) {
     var ul = document.querySelector("#mensagensErro");
+    var li = innerHTML = "";
     erros.array.forEach(function(erro){
         var li = document.createElement("li");
         li.textContent = erro;
@@ -61,7 +65,19 @@ function mountTd(dado, classe) {
 
 function validaPaciente (paciente) {
     var erro = [];
-    if (!validaPeso(paciente.peso)) erro.push("O peso é invãlido!!");
-    if (!validaAltura(paciente.altura)) erro.push("A altura é invãlida!!");
+    if (paciente.nome.length == 0) {
+        erro.push("Nome nao pode ser em branco");
+    }
+    if (paciente.gordura.length == 0) {
+        erro.push("Gordura nao pode ser em branco");
+    }
+    if (paciente.peso.length == 0) {
+        erro.push("Peso nao pode ser em branco");
+    }
+    if (paciente.altura.length == 0) {
+        erro.push("Altura nao pode ser em branco");
+    }
+    if (!validaPeso(paciente.peso)) erro.push("O peso é inválido!!");
+    if (!validaAltura(paciente.altura)) erro.push("A altura é inválida!!");
     return erro;
 }
