@@ -6,12 +6,12 @@ btnAdicionaPaciente.addEventListener("click", function(event) {
     var paciente = getPacienteFormulario(form);
     var pacienteTr = mountTr(paciente);
     var erros = validaPaciente(paciente);
+    
     console.log(erros);
     
     if (erros.length > 0) {
-        var mensagemErro = document.querySelector("#mensagensErro");
-        mensagemErro.textContent = erros;
-        return
+        exibeMensagensDeErro(erros);
+        return;
     }
     var tabela = document.querySelector("#tabela-pacientes");
     tabela.appendChild(pacienteTr);
@@ -23,8 +23,8 @@ btnAdicionaPaciente.addEventListener("click", function(event) {
 
 function exibeMensagensDeErro(erros) {
     var ul = document.querySelector("#mensagensErro");
-    var li = innerHTML = "";
-    erros.array.forEach(function(erro){
+    ul.innerHTML = "";
+    erros.forEach(function(erro){
         var li = document.createElement("li");
         li.textContent = erro;
         ul.appendChild(li);
@@ -64,20 +64,21 @@ function mountTd(dado, classe) {
 }
 
 function validaPaciente (paciente) {
-    var erro = [];
+    var erros = [];
     if (paciente.nome.length == 0) {
-        erro.push("Nome nao pode ser em branco");
+        erros.push("Nome nao pode ser em branco");
     }
     if (paciente.gordura.length == 0) {
-        erro.push("Gordura nao pode ser em branco");
+        erros.push("Gordura nao pode ser em branco");
     }
     if (paciente.peso.length == 0) {
-        erro.push("Peso nao pode ser em branco");
+        erros.push("Peso nao pode ser em branco");
     }
     if (paciente.altura.length == 0) {
-        erro.push("Altura nao pode ser em branco");
+        erros.push("Altura nao pode ser em branco");
     }
-    if (!validaPeso(paciente.peso)) erro.push("O peso é inválido!!");
-    if (!validaAltura(paciente.altura)) erro.push("A altura é inválida!!");
-    return erro;
+    if (!validaPeso(paciente.peso)) erros.push("Peso inválido!!");
+    if (!validaAltura(paciente.altura)) erros.push("Altura inválida!!");
+    
+    return erros;
 }
