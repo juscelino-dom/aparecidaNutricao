@@ -7,19 +7,19 @@ campoFiltro.addEventListener("input", function() {
         paciente.forEach(function(pacientes) {
             var tdNome = pacientes.querySelector(".info-nome");
             var nome = tdNome.textContent;
-            
-            if (nome != inputFiltro){
+            var expressao = new RegExp(inputFiltro, "i");
+            if (!expressao.test(nome)){
                 pacientes.classList.add("invisivel");
             } else {
                 pacientes.classList.remove("invisivel");
             }
-        }
+        });
         
     } else {
         paciente.forEach(function(pacientes) {
             var tdNome = pacientes.querySelector(".info-nome");
             var nome = tdNome.textContent;
             pacientes.classList.remove("invisivel");
-        });
+        })
     }
 });
